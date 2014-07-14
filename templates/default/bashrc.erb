@@ -1,0 +1,36 @@
+# Put your fun stuff here.
+export PATH=~/bin:~/sbin:<%= @appdir %>/shared/bin:$PATH
+
+export OPSWORKS_PRIVATE_IP=<%= @private_ip.gsub(/\./, '-')%>
+export OPSWORKS_HOSTNAME=<%= @hostname.downcase.gsub(/\s/, '')%>
+export OPSWORKS_TYPE=<%= @box_type.downcase.gsub(/\s/, '') %>
+export OPSWORKS_ID=<%= @node_id %>
+export OPSWORKS_ZONE=<%= @zone %>
+<% unless @node_app %>
+export RAILS_ENV=<%= @app_env %>
+<% end %>
+
+alias ll='ls -l'
+alias la='ls -al'
+alias be='bundle exec'
+
+<% if @layers.keys.any? {|layer| %w[rails-puma-app utility].include?(layer) } -%>
+alias cdc='cd <%= @appdir %>/current'
+alias cds='cd <%= @appdir %>/shared'
+<% end -%>
+<% unless @node_app %>
+alias console='cdc; sudo bundle exec rails console <%= @app_env %>'
+<% end %>
+alias psg='sudo ps aux | grep -v grep | grep '
+
+
+
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+  # Shell is non-interactive.  Be done now!
+  return
+fi
+
+PS1="\[\033[01;31m\]$OPSWORKS_HOSTNAME \[\033[01;32m\]$OPSWORKS_TYPE \[\033[01;36m\]$OPSWORKS_ID \[\033[01;35m\]$OPSWORKS_ZONE\[\033[01;34m\] $OPSWORKS_PRIVATE_IP \w \n\$\[\033[00m\] "

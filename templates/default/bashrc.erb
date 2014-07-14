@@ -14,7 +14,7 @@ alias ll='ls -l'
 alias la='ls -al'
 alias be='bundle exec'
 
-<% if @layers.keys.any? {|layer| %w[rails-puma-app utility].include?(layer) } -%>
+<% if @layers.any? {|layer| %w[rails-puma-app utility].include?(layer) } -%>
 alias cdc='cd <%= @appdir %>/current'
 alias cds='cd <%= @appdir %>/shared'
 <% end -%>

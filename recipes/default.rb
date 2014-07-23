@@ -1,8 +1,12 @@
 app_name = node[:appname] || node[:opsworks][:applications].first["slug_name"]
-appdir = case
-         when node[:appdir] then node[:appdir]
-         when node[:deploy] then node[:deploy][app_name][:deploy_to]
-         when node[:opsworks] then node[:opsworks][:deploy][app_name][:deploy_to]
+appdir = begin
+           case
+           when node[:appdir] then node[:appdir]
+           when node[:deploy] then node[:deploy][app_name][:deploy_to]
+           when node[:opsworks] then node[:opsworks][:deploy][app_name][:deploy_to]
+           end
+         rescue => e
+           nil
          end
 
 template "/etc/profile.d/custom_bashrc.sh" do

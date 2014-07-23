@@ -1,4 +1,9 @@
 app_name = node[:appname] || node[:opsworks][:applications].first["slug_name"]
+appdir = case
+         when node[:appdir] then node[:appdir]
+         when node[:deploy] then node[:deploy][app_name][:deploy_to]
+         when node[:opsworks] then node[:opsworks][:deploy][app_name][:deploy_to]
+         end
 
 template "/etc/profile.d/custom_bashrc.sh" do
   source "bashrc.erb"
@@ -8,7 +13,7 @@ template "/etc/profile.d/custom_bashrc.sh" do
   variables({
     :layers => node[:opsworks][:instance][:layers],
     :node_app => node.keys.include?("opsworks_nodejs"),
-    :appdir => (node[:appdir] || node[:opsworks][:deploy][app_name][:deploy_to]),
+    :appdir => appdir,
     :app_env => (node[:node_env] || node[:rails_env]),
     :private_ip => node[:opsworks][:instance][:private_ip],
     :hostname => node[:opsworks][:instance][:hostname],

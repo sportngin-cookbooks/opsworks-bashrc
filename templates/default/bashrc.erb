@@ -8,7 +8,7 @@ export OPSWORKS_ID=<%= @node_id %>
 export OPSWORKS_ZONE=<%= @zone %>
 
 # Custom ENV variables
-<% node.fetch(:opsworks_bashrc, {}).fetch(:custom_env_variables, {}).each do |variable, value| -%>
+<% @custom_env_variables.each do |variable, value| -%>
 export <%= variable %>=<%= value %>
 <% end -%>
 
@@ -22,7 +22,7 @@ alias cds='cd <%= @appdir %>/shared'
 alias psg='sudo ps aux | grep -v grep | grep '
 
 # Custom bash aliases
-<% node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_aliases, {}).each do |alias_name, alias_value| -%>
+<% @custom_bash_aliases.each do |alias_name, alias_value| -%>
 alias <%= alias_name %>='<%= alias_value %>'
 <% end %>
 

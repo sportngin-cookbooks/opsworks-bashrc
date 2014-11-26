@@ -27,6 +27,10 @@ suites:
     run_list:
       - recipe[opsworks-bashrc::default]
     attributes:
+      opsworks_bashrc:
+        custom_env_variables:
+          RAILS_ENV: "production"
+          FOO_BAR: "baz"
       opsworks:
         instance:
           private_ip: '1.2.3.4'

@@ -6,9 +6,11 @@ export OPSWORKS_HOSTNAME=<%= @hostname.downcase.gsub(/\s/, '')%>
 export OPSWORKS_TYPE=<%= @box_type.downcase.gsub(/\s/, '') %>
 export OPSWORKS_ID=<%= @node_id %>
 export OPSWORKS_ZONE=<%= @zone %>
-<% unless @node_app %>
-export RAILS_ENV=<%= @app_env %>
-<% end %>
+
+# Custom ENV variables
+<% node.fetch(:opsworks_bashrc, {}).fetch(:custom_env_variables, {}).each do |variable, value| -%>
+export <%= variable %>=<%= value %>
+<% end -%>
 
 alias ll='ls -l'
 alias la='ls -al'

@@ -16,6 +16,12 @@ describe file('/etc/profile.d/custom_bashrc.sh') do
     its(:content) { should match 'export OPSWORKS_ZONE=us-east' }
   end
 
+  context "custom environment variables" do
+    its(:content) { should match '# Custom ENV variables' }
+    its(:content) { should match 'export RAILS_ENV=production' }
+    its(:content) { should match 'export FOO_BAR=baz' }
+  end
+
   context "basic aliases" do
     its(:content) { should match "alias ll='ls -l'" }
     its(:content) { should match "alias la='ls -al'" }

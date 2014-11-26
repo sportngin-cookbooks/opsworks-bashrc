@@ -26,4 +26,13 @@ suites:
   - name: default
     run_list:
       - recipe[opsworks-bashrc::default]
-    attributes: {}
+    attributes:
+      opsworks:
+        instance:
+          private_ip: '1.2.3.4'
+          hostname: 'foo_app_01'
+          instance_type: 't1.micro'
+          aws_instance_id: 'asdfjkl'
+          availability_zone: 'us-east'
+        applications:
+          - slug_name: 'foo_app'

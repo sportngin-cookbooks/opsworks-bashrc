@@ -1,4 +1,4 @@
-app_name = node[:appname] || node[:opsworks][:applications].first["slug_name"]
+app_name = node[:appname] || node.fetch(:opsworks, {}).fetch(:applications, [{}]).first["slug_name"]
 appdir = begin
            case
            when node[:appdir] then node[:appdir]

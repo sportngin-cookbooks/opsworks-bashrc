@@ -16,9 +16,7 @@ template "/etc/profile.d/custom_bashrc.sh" do
   mode 0644
   variables({
     :layers => node[:opsworks][:instance][:layers],
-    :node_app => node.keys.include?("opsworks_nodejs"),
     :appdir => appdir,
-    :app_env => (node[:node_env] || node[:rails_env]),
     :private_ip => node[:opsworks][:instance][:private_ip],
     :hostname => node[:opsworks][:instance][:hostname],
     :box_type => node[:opsworks][:instance][:instance_type],

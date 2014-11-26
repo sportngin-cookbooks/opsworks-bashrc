@@ -36,3 +36,6 @@ suites:
           availability_zone: 'us-east'
         applications:
           - slug_name: 'foo_app'
+        deploy:
+          foo_app:
+            deploy_to: '/srv/www/foo_app'

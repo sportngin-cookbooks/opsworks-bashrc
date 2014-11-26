@@ -31,6 +31,10 @@ suites:
         custom_env_variables:
           RAILS_ENV: "production"
           FOO_BAR: "baz"
+        custom_bash_aliases:
+          console: "cdc; sudo bundle exec rails console $RAILS_ENV"
+          grep: "grep --colour=auto"
+          hw: 'echo "hello world"'
       opsworks:
         instance:
           private_ip: '1.2.3.4'

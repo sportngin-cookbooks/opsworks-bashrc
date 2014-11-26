@@ -22,6 +22,13 @@ describe file('/etc/profile.d/custom_bashrc.sh') do
     its(:content) { should match 'export FOO_BAR=baz' }
   end
 
+  context "custom bash aliases" do
+    its(:content) { should match '# Custom bash aliases' }
+    its(:content) { should match "alias grep='grep --colour=auto'" }
+    its(:content) { should match /alias console='cdc; sudo bundle exec rails console \$RAILS_ENV'/ }
+    its(:content) { should match "alias hw='echo \"hello world\"'" }
+  end
+
   context "basic aliases" do
     its(:content) { should match "alias ll='ls -l'" }
     its(:content) { should match "alias la='ls -al'" }

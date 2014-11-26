@@ -15,15 +15,16 @@ export <%= variable %>=<%= value %>
 alias ll='ls -l'
 alias la='ls -al'
 alias be='bundle exec'
-
 <% if @appdir -%>
 alias cdc='cd <%= @appdir %>/current'
 alias cds='cd <%= @appdir %>/shared'
 <% end -%>
-<% unless @node_app %>
-alias console='cdc; sudo bundle exec rails console <%= @app_env %>'
-<% end %>
 alias psg='sudo ps aux | grep -v grep | grep '
+
+# Custom bash aliases
+<% node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_aliases, {}).each do |alias_name, alias_value| -%>
+alias <%= alias_name %>='<%= alias_value %>'
+<% end %>
 
 
 

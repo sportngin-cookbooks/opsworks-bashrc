@@ -14,6 +14,7 @@ template "/etc/profile.d/custom_bashrc.sh" do
     :node_id => node[:opsworks][:instance][:aws_instance_id],
     :zone => node[:opsworks][:instance][:availability_zone],
     :custom_env_variables => node.fetch(:opsworks_bashrc, {}).fetch(:custom_env_variables, {}),
-    :custom_bash_aliases => node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_aliases, {})
+    :custom_bash_aliases => node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_aliases, {}),
+    :custom_bash_scripts => node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_scripts, [])
   })
 end

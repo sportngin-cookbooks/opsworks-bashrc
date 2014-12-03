@@ -26,6 +26,12 @@ alias psg='sudo ps aux | grep -v grep | grep '
 alias <%= alias_name %>='<%= alias_value %>'
 <% end %>
 
+# Custom bash scripts
+<% @custom_bash_scripts.each do |script| -%>
+<%= script %>
+
+<% end %>
+
 
 
 # Test for an interactive shell.  There is no need to set anything

@@ -35,6 +35,11 @@ suites:
           console: "cdc; sudo bundle exec rails console $RAILS_ENV"
           grep: "grep --colour=auto"
           hw: 'echo "hello world"'
+        custom_bash_scripts:
+          - |
+            new_lib_path=`ls -p /opt/lib/foo_lib/versions/ | grep "/" | sort | head -1`
+            export PATH=$PATH:$new_lib_path
+          - 'export PATH=$PATH:/the/best/lib/evar/bin/'
       opsworks:
         instance:
           private_ip: '1.2.3.4'

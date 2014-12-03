@@ -29,6 +29,13 @@ describe file('/etc/profile.d/custom_bashrc.sh') do
     its(:content) { should match "alias hw='echo \"hello world\"'" }
   end
 
+  context "custom bash scripts" do
+    its(:content) { should match '# Custom bash scripts' }
+    its(:content) { should match 'new_lib_path=`ls -p /opt/lib/foo_lib/versions/ | grep "/" | sort | head -1`' }
+    its(:content) { should match /export PATH=\$PATH:\$new_lib_path/ }
+    its(:content) { should match /export PATH=\$PATH:\/the\/best\/lib\/evar\/bin\// }
+  end
+
   context "basic aliases" do
     its(:content) { should match "alias ll='ls -l'" }
     its(:content) { should match "alias la='ls -al'" }

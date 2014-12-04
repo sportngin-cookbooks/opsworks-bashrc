@@ -32,6 +32,13 @@ alias <%= alias_name %>='<%= alias_value %>'
 
 <% end %>
 
+# Custom source files
+<% @custom_source_files.each do |_, file_name| -%>
+if [ -f /usr/share/custom_bashrc/<%= file_name %> ]; then
+  [[ -s "/usr/share/custom_bashrc/<%= file_name %>" ]] && source "/usr/share/custom_bashrc/<%= file_name %>"
+fi
+<% end %>
+
 
 
 # Test for an interactive shell.  There is no need to set anything

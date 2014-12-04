@@ -9,7 +9,11 @@ Berksfile.lock
 /cookbooks
 
 # Bundler
-Gemfile.lock
 bin/*
 .bundle/*
+
+.kitchen/
+.idea
+*.pem
+*.local.yml
 

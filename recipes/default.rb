@@ -21,16 +21,16 @@ template "/etc/profile.d/custom_bashrc.sh" do
   owner "root"
   group "root"
   mode 0644
-  settings = app_settings
+  data = instance_data
 
   variables({
     :appdir => app_dir,
-    :layers => settings[:layers],
-    :private_ip => settings[:private_ip],
-    :hostname => settings[:hostname],
-    :box_type => settings[:box_type],
-    :node_id => settings[:node_id],
-    :zone => settings[:zone],
+    :layers => data[:layers],
+    :private_ip => data[:private_ip],
+    :hostname => data[:hostname],
+    :box_type => data[:box_type],
+    :node_id => data[:node_id],
+    :zone => data[:zone],
     :custom_env_variables => node.fetch(:opsworks_bashrc, {}).fetch(:custom_env_variables, {}),
     :custom_bash_aliases => node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_aliases, {}),
     :custom_bash_scripts => node.fetch(:opsworks_bashrc, {}).fetch(:custom_bash_scripts, []),

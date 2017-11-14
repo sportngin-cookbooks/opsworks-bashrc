@@ -16,7 +16,7 @@ module OpsworksBashrc
       end
     end
 
-    def app_settings
+    def instance_data
       if node[:opsworks]
         { layers: node[:opsworks][:instance][:layers],
           private_ip: node[:opsworks][:instance][:private_ip],
